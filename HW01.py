@@ -5,14 +5,17 @@ import unittest
 def classifyTriangle(a, b, c):
     length = [a, b, c]
     length.sort()
-    if(a == b and a == c):
-        return 'Equilateral'
-    elif(a == b or a == c or b == c):
-        return 'Isosceles'
-    elif(length[0]**2 + length[1]**2 == length[2]**2):
-        return 'Right'
+    if (length[0] + length[1] > length[2]):
+        if(a == b and a == c):
+            return 'Equilateral'
+        elif(a == b or a == c or b == c):
+            return 'Isosceles'
+        elif(length[0]**2 + length[1]**2 == length[2]**2):
+            return 'Right'
+        else:
+            return 'Scalene'
     else:
-        return 'Scalene'
+        return 'Not a Triangle'
 
 
 # print the result
@@ -34,6 +37,9 @@ class TestClassifyTriangle(unittest.TestCase):
 
     def testSet4(self):
         self.assertEqual(classifyTriangle(4, 5, 3), 'Scalene')
+
+    def testSet5(self):
+        self.assertEqual(classifyTriangle(10, 1, 1), 'Not a Triangle')
 
 
 if __name__ == '__main__':
